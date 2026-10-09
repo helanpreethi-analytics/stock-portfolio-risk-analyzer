@@ -239,7 +239,9 @@ Step by step:
 
 ## 6. Visualizations
 
-### 6.1 Price chart with buy/sell signals
+### 6. Visualizations
+
+#### 6.1 Price chart with buy/sell signals
 
 Each chart shows the closing price (faint line), the 20-day SMA, the 50-day SMA, green ▲ for buy signals and red ▼ for sell signals.
 
@@ -247,21 +249,21 @@ Each chart shows the closing price (faint line), the 20-day SMA, the 50-day SMA,
 
 **Apple (AAPL)**
 
-![AAPL strategy signals](images/aapl_signals.png)
+![AAPL strategy signals](images/aapl_signals.png.png)
 
 **Microsoft (MSFT)**
 
-![MSFT strategy signals](images/msft_signals.png)
+![MSFT strategy signals](images/msft_signals.png.png)
 
 **Tesla (TSLA)**
 
-![TSLA strategy signals](images/tsla_signals.png)
+![TSLA strategy signals](images/tsla_signals.png.png)
 
-### 6.2 Correlation heatmap
+#### 6.2 Correlation heatmap
 
 A grid showing how strongly each pair of stocks moves together. Warm colours are high correlation, cool colours are low. The diagonal is always 1.00 because a stock is perfectly correlated with itself.
 
-![Correlation heatmap](images/correlation_heatmap.png)
+![Correlation heatmap](images/correlation_heatmap.png.png)
 
 ---
 
