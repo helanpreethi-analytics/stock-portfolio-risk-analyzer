@@ -3,7 +3,7 @@
 A Python project that downloads real stock market data, measures how risky each stock is, tests a simple trading rule, trains a machine learning model to guess the next day's direction, and presents everything in charts and a written findings report.
 
 **Stocks analysed:** Apple (AAPL), Microsoft (MSFT), Tesla (TSLA)
-**Period:** 1 January 2022 to 29 December 2023 (about 2 years, roughly 500 trading days)
+**Period:** 3 January 2022 to 29 December 2023 (501 trading days)
 **Data source:** Yahoo Finance via the free `yfinance` library (no API key needed)
 
 ---
@@ -239,8 +239,6 @@ Step by step:
 
 ## 6. Visualizations
 
-### 6. Visualizations
-
 #### 6.1 Price chart with buy/sell signals
 
 Each chart shows the closing price (faint line), the 20-day SMA, the 50-day SMA, green ▲ for buy signals and red ▼ for sell signals.
@@ -269,48 +267,41 @@ A grid showing how strongly each pair of stocks moves together. Warm colours are
 
 ## 7. Findings
 
-> Replace every `[...]` with the numbers from your own `=== FINDINGS ===` output.
-
 ### 7.1 Results table
 
 | Metric | AAPL | MSFT | TSLA |
 |---|---|---|---|
-| Annual return | [ ]% | [ ]% | [ ]% |
-| Annual volatility | [ ]% | [ ]% | [ ]% |
-| Sharpe ratio | [ ] | [ ] | [ ] |
-| Max drawdown | [ ]% | [ ]% | [ ]% |
-| 95% daily VaR | [ ]% | [ ]% | [ ]% |
-| ML up/down accuracy | [ ]% | [ ]% | [ ]% |
+| Annual return | 7.62% | 11.48% | -5.80% |
+| Annual volatility | 29.08% | 30.73% | 60.17% |
+| Sharpe ratio | 0.19 | 0.31 | -0.13 |
+| Max drawdown | -30.02% | -34.45% | -71.79% |
+| 95% daily VaR | -3.01% | -3.09% | -6.63% |
+| ML up/down accuracy | 44.44% | 52.53% | 52.53% |
 
 ### 7.2 Return versus risk
-
-- **[Stock]** delivered the highest annual return at [ ]%, while **[stock]** was the most volatile at [ ]%.
-- **[Stock]** had the best Sharpe ratio ([ ]), meaning it paid the most for each unit of risk taken.
-- A negative or very low Sharpe ratio for **[stock]** means its return did not compensate for its bumpiness.
+- **MSFT** delivered the highest annual return at 11.48%, while **TSLA** was the most volatile at 60.17%.
+- **MSFT** had the best Sharpe ratio (0.31), meaning it paid the most for each unit of risk taken.
+- **TSLA's** negative Sharpe ratio (-0.13) means its return did not compensate for its bumpiness.
 
 ### 7.3 Worst-case behaviour
-
-- The deepest drawdown was **[stock]** at [ ]%. An investor who bought at its peak would have seen that much of their money disappear before any recovery.
-- On the worst 5% of days, **[stock]** lost [ ]% or more, the largest daily downside of the three.
+- The deepest drawdown was **TSLA** at -71.79%. An investor who bought at its peak would have seen that much of their money disappear before any recovery.
+- On the worst 5% of days, **TSLA** lost 6.63% or more, roughly double AAPL (3.01%) and MSFT (3.09%).
 - 2022 was a broad market decline driven by rising interest rates, so the drawdowns reflect a stressful period rather than a calm one.
 
 ### 7.4 Strategy behaviour
-
-- The 20/50 crossover produced [ ] buy and [ ] sell signals for AAPL, [ ] and [ ] for MSFT, and [ ] and [ ] for TSLA.
-- It tends to work best in **clear, sustained trends** and poorly in **choppy, sideways markets**, where it keeps buying and selling at the wrong time.
-- Because the average is built from past prices, signals always arrive **late**. By the time the lines cross, part of the move has already happened.
+- The 20/50 crossover works best in clear, sustained trends and poorly in choppy, sideways markets.
+- Signals always arrive late, because the averages are built from past prices.
 
 ### 7.5 Machine learning result
-
-- Accuracy was about [ ]% for AAPL, [ ]% for MSFT and [ ]% for TSLA.
-- Results close to 50% mean the model did **not** beat a coin flip. This is consistent with the idea that short-term price moves are very hard to predict from simple price features.
-- The test set is only about 100 days, so a few percentage points above or below 50% is likely luck, not skill.
+- Accuracy was 44.44% for AAPL, 52.53% for MSFT and 52.53% for TSLA.
+- These are close to a coin flip. With a test set of about 99 days, a few points above or below 50% is likely noise, not skill.
 
 ### 7.6 Diversification
 
-- The correlation between [stock] and [stock] was [ ], the highest pair. These two largely moved together.
-- The correlation between [stock] and [stock] was [ ], the lowest pair, so this combination gave the most diversification.
-- Because all three are large US technology-related companies, their correlations are expected to be positive, so holding only these three gives **limited** protection against a sector-wide fall.
+- The correlation between AAPL and MSFT was 0.74, the highest pair. These two largely moved together.
+- The correlation between MSFT and TSLA was 0.47, the lowest pair, so this combination gave the most diversification.
+- AAPL and TSLA sat in between at 0.58.
+- All three correlations are positive, and all three are large US technology-related companies, so holding only these gives limited protection against a sector-wide fall.
 
 ---
 
@@ -341,7 +332,8 @@ Being clear about limits is part of good analysis.
 - **Simple ML features.** The model uses only three price-based features. Real models use many more inputs, and even then predicting direction is very hard.
 - **Small test set.** About 100 test days make the accuracy figure noisy.
 - **Survivorship bias.** These are companies that are large and well known today, which may flatter their historical results.
-
+- **No backtest.** The strategy produces signals only and is not backtested against buy-and-hold. The last data row has no next-day price, so its label may be inaccurate (negligible effect on about 99 test days).
+The strategy produces signals only and is not backtested against buy-and-hold. The last data row has no next-day price, so its label may be inaccurate (negligible effect on about 99 test days).
 ---
 
 ## 10. Next steps
@@ -404,4 +396,4 @@ The findings print in the terminal, and chart windows open one after another. Cl
 | scikit-learn | Random Forest model |
 | matplotlib | Charts |
 | seaborn | Heatmap |
-| pytest | Testing |
+
